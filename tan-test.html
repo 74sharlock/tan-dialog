@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="tan.css">
+    <link rel="stylesheet" href="animate.min.css">
+    <style>
+        body {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <button>点我1</button>
+    <button>点我2</button>
+    <button>点我3</button>
+    <button>提示框</button>
+    <button>确认框</button>
+    <button>短暂提示</button>
+    <script type="text/javascript" src="shlk-dialog.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var btns = document.getElementsByTagName('button'),
+                config = {
+                    title:'标题',
+                    content:'文本<br><input type="text" placeholder="输入,然后查看控制台">',
+                    width:300,
+                    height:'auto',
+                    okVal:'ok',
+                    cancelVal:'cancel',
+                    ok:function(){
+                        console.log('你点了OK按钮');
+                        this.close();
+                    },
+                    cancel:function(){
+                        console.log('你点了cancel按钮');
+                    },
+                    onShow:function(){
+                        var self = this, input = this.node.querySelector('input');
+                        input.addEventListener('input',function(){
+                            self.returnValue = this.value.trim();
+                        },false);
+                        console.log('就要显示了');
+                    },
+                    afterShow:function(){
+                        console.log('显示完成');
+                    },
+                    onClose:function(){
+                        console.log('现在要关闭了', '然后输入框的值是' + this.returnValue);
+                    },
+                    afterClose:function(){
+                        console.log('已经关闭,你保存的值是' + this.returnValue);
+                    }
+                };
+
+            //一个普通的弹窗, 使用默认动画
+            btns[0].onclick = function(){
+                tan(config).show();
+            };
+
+            //使用自定义动画的弹窗
+            btns[1].onclick = function(){
+                config['in'] = {
+                    name:'bounceInLeft'
+                };
+                config['out'] = {
+                    name:'bounceOutRight'
+                };
+                tan(config).show();
+            };
+
+            //使用另一种动画的弹窗
+            btns[2].onclick = function(){
+                config['in'] = {
+                    name:'flipInX'
+                };
+                config['out'] = {
+                    name:'flipOutX'
+                };
+                tan(config).show();
+            };
+
+            //
+            btns[3].onclick = function(){
+                tanAlert('提示框',function(){
+                    infoTips('你点击了取消!')
+                });
+            };
+
+            btns[4].onclick = function(){
+                tanConfirm('确认框',function(){
+                    sucTips('你点击了确定!')
+                },function(){
+                    errorTips('你点击了取消!')
+                });
+            };
+
+            btns[5].onclick = function(){
+                tanTips('2秒之后关闭', 2000, function(){
+                    primaryTips('关闭!', 2000, function(){
+                        warnTips('别忘了还有这个警告弹窗样式.');
+                    });
+                });
+            };
+
+        };
+    </script>
+</body>
+</html>
