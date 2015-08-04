@@ -32,7 +32,7 @@
     className = this.config['skin'] ? ' ' + this.config['skin'] : '';
     div.className = 'tan-block hidden' + className;
     div.id = this.id;
-    title = (this.config['title'] !== false ? '<div class="tan-title"><span>' + this.config['title'] + '</span><i class="close-this fa fa-close"></i></div>' : '');
+    title = (this.config['title'] !== false ? '<div class="tan-title"><span>' + this.config['title'] + '</span><i class="close-this fa fa-close">X</i></div>' : '');
     content = this.config['content'] || '';
     okVal = this.config['okVal'] || '确定';
     cancelVal = this.config['cancelVal'] || '取消';
