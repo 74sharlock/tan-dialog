@@ -18,7 +18,7 @@
     <button>提示框</button>
     <button>确认框</button>
     <button>短暂提示</button>
-    <script type="text/javascript" src="shlk-dialog.min.js"></script>
+    <script type="text/javascript" src="shlk-dialog.js"></script>
     <script type="text/javascript">
         window.onload = function(){
             var btns = document.getElementsByTagName('button'),
@@ -29,10 +29,7 @@
                     height:'auto',
                     okVal:'ok',
                     cancelVal:'cancel',
-                    ok:function(){
-                        console.log('你点了OK按钮');
-                        this.close();
-                    },
+
                     cancel:function(){
                         console.log('你点了cancel按钮');
                     },
@@ -52,33 +49,56 @@
                     afterClose:function(){
                         console.log('已经关闭,你保存的值是' + this.returnValue);
                     }
-                };
+                },
+                d = tan(config),
+                e = (function(){
+                    config['in'] = {
+                        name:'bounceInLeft'
+                    };
+                    config['out'] = {
+                        name:'bounceOutRight'
+                    };
+                    return tan(config);
+                })(),
+                f = (function(){
+                    config['in'] = {
+                        name:'flipInX'
+                    };
+                    config['out'] = {
+                        name:'flipOutX'
+                    };
+                    return tan(config);
+                })();
+
+            //第一个弹窗增加自定义ok事件
+            d.on('ok', function(){
+                console.log('你点了OK按钮');
+                this.close();
+            });
+
+            //第二个弹窗增加自定义cancel事件
+            e.on('cancel',function(){
+                console.log('自定义的关闭按钮事件');
+            });
+
+            //第三个弹窗增加自定义的afterClose事件
+            f.on('afterClose',function(){
+                console.log('自定义的关闭动作结束后事件(这里绕吗?)');
+            });
 
             //一个普通的弹窗, 使用默认动画
             btns[0].onclick = function(){
-                tan(config).show();
+                d.show();
             };
 
             //使用自定义动画的弹窗
             btns[1].onclick = function(){
-                config['in'] = {
-                    name:'bounceInLeft'
-                };
-                config['out'] = {
-                    name:'bounceOutRight'
-                };
-                tan(config).show();
+                e.show();
             };
 
             //使用另一种动画的弹窗
             btns[2].onclick = function(){
-                config['in'] = {
-                    name:'flipInX'
-                };
-                config['out'] = {
-                    name:'flipOutX'
-                };
-                tan(config).show();
+                f.show();
             };
 
             //
