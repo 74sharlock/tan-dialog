@@ -15,6 +15,18 @@ isFunction = (fn) ->
 
 now = () -> new Date().getTime()
 
+_bindEvent = (event, fn) ->
+
+	@listeners = @listeners or {}
+	@listeners[event] = @listeners[event] or []
+	@listeners[event].push(fn);
+
+	# @node.addEventListener(event, fn , no)
+
+_fireEvent = (event) ->
+
+	return fn.call(@) for fn in @listeners[event] when @listeners[event] and isFunction(fn) if @listeners
+
 # 创建弹框节点
 createNode = ()->
 	div = CE('div')
@@ -29,7 +41,7 @@ createNode = ()->
 	content = @config['content'] or ''
 	okVal = @config['okVal'] or '确定'
 	cancelVal = @config['cancelVal'] or '取消'
-	btn = (if @config['ok'] then '<a class="btn btn-ok">' + okVal + '</a>' else '') + (if @config['cancel'] then '<a class="btn btn-cancel">' + cancelVal + '</a>' else '')
+	btn = (if @config['ok'] isnt false then '<a class="btn btn-ok">' + okVal + '</a>' else '') + (if @config['cancel'] isnt false then '<a class="btn btn-cancel">' + cancelVal + '</a>' else '')
 
 	# 插入内容
 	div.innerHTML = title + '<div class="tan-content">' + content + '</div><div class="tan-btn-area">' + btn + '</div>'
@@ -161,7 +173,7 @@ class tan
 		@id = 'tan' + now()
 		@isOperating = false
 
-	version:'1.0.1'
+	version:'0.1.0'
 
 	# 原型显示方法
 	# 参数类型:boolean
@@ -189,14 +201,17 @@ class tan
 
 		# 执行回调显示前回调
 		@config['onShow'].call(@) if isFunction(@config['onShow'])
+		_fireEvent.call(@,'show') if @listeners and @listeners['show']
 
 		# 按钮绑定事件
 		@node.querySelector('.btn-ok').addEventListener('click',()->
 			self.config['ok'].call(self) if isFunction(self.config['ok'])
+			_fireEvent.call(self,'ok') if self.listeners and self.listeners['ok']
 		,false) if @node.querySelector('.btn-ok')
 
 		@node.querySelector('.btn-cancel').addEventListener('click',()->
 			k = self.config['cancel'].call(self) if isFunction(self.config['cancel'])
+			_fireEvent.call(self,'cancel') if self.listeners and self.listeners['cancel']
 			if k is false
 				return k
 			else if self
@@ -213,6 +228,7 @@ class tan
 		@config['in'].fn = ()->
 			# 显示后回调
 			self.config['afterShow'].call(self) if isFunction(self.config['afterShow'])
+			_fireEvent.call(self, 'afterShow') if self.listeners and self.listeners['afterShow']
 		@node.classList.remove('hidden');
 		animate.call(@node,@config['in']);
 		@
@@ -224,7 +240,7 @@ class tan
 			@mask.style.opacity = 0 if @mask
 
 			@config['onClose'].call(@) if isFunction(@config['onClose'])
-
+			_fireEvent.call(self, 'close') if self.listeners and self.listeners['close']
 			if @node
 				if not @config['out']
 					@config['out'] =
@@ -233,14 +249,18 @@ class tan
 				@config['out'].fn = ()->
 					self.node.classList.add('hidden');
 					self.config['afterClose'].call(self) if isFunction(self.config['afterClose'])
+					_fireEvent.call(self, 'afterClose') if self.listeners and self.listeners['afterClose']
 					self.isOperating = false
 					doc.body.removeChild(self.node) if self.node
 					doc.body.removeChild(self.mask) if self.mask
 					# 销毁对象实例, 防止多次创建弹框消耗内存
-					self = null
+					# self = null
 
 				animate.call(@node,@config['out']);
 			@
+
+	on:(event,fn)->
+		_bindEvent.call(@, event, fn)
 
 #公开到全局
 window.tan = (config)->
