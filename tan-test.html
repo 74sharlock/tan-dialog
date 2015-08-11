@@ -75,44 +75,45 @@
                     return tan(opts);
                 })();
 
-            //第一个弹窗增加自定义ok事件
+            // 第一个弹窗增加自定义ok事件
             d.on('ok', function(){
                 console.log('你点了OK按钮');
                 this.close();
             });
 
-            //第二个弹窗增加自定义cancel事件
+            // 第二个弹窗增加自定义cancel事件
             e.on('cancel',function(){
                 console.log('自定义的关闭按钮事件');
             });
 
-            //第三个弹窗增加自定义的afterClose事件
+            // 第三个弹窗增加自定义的afterClose事件
             f.on('afterClose',function(){
                 console.log('自定义的关闭动作结束后事件(这里绕吗?)');
             });
 
-            //一个普通的弹窗, 使用默认动画
+            // 一个普通的弹窗, 使用默认动画
             btns[0].onclick = function(){
                 d.show();
             };
 
-            //使用自定义动画的弹窗
+            // 使用自定义动画的弹窗
             btns[1].onclick = function(){
                 e.show();
             };
 
-            //使用另一种动画的弹窗
+            // 使用另一种动画的弹窗
             btns[2].onclick = function(){
                 f.show();
             };
 
-            //
+            // 提示框
             btns[3].onclick = function(){
                 tanAlert('提示框',function(){
                     infoTips('你点击了取消!')
                 });
             };
 
+            // 提示确认框
             btns[4].onclick = function(){
                 tanConfirm('确认框',function(){
                     sucTips('你点击了确定!')
@@ -121,6 +122,7 @@
                 });
             };
 
+            // 短暂提示
             btns[5].onclick = function(){
                 tanTips('2秒之后关闭', 2000, function(){
                     primaryTips('关闭!', 2000, function(){
