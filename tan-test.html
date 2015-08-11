@@ -18,56 +18,61 @@
     <button>提示框</button>
     <button>确认框</button>
     <button>短暂提示</button>
+    <p>F12打开控制台查看信息</p>
     <script type="text/javascript" src="shlk-dialog.js"></script>
     <script type="text/javascript">
         window.onload = function(){
             var btns = document.getElementsByTagName('button'),
-                config = {
-                    title:'标题',
-                    content:'文本<br><input type="text" placeholder="输入,然后查看控制台">',
-                    width:300,
-                    height:'auto',
-                    okVal:'ok',
-                    cancelVal:'cancel',
+                config = function(){
+                    return {
+                        title:'标题',
+                        content:'文本<br><input type="text" placeholder="输入,然后查看控制台">',
+                        width:300,
+                        height:'auto',
+                        okVal:'ok',
+                        cancelVal:'cancel',
 
-                    cancel:function(){
-                        console.log('你点了cancel按钮');
-                    },
-                    onShow:function(){
-                        var self = this, input = this.node.querySelector('input');
-                        input.addEventListener('input',function(){
-                            self.returnValue = this.value.trim();
-                        },false);
-                        console.log('就要显示了');
-                    },
-                    afterShow:function(){
-                        console.log('显示完成');
-                    },
-                    onClose:function(){
-                        console.log('现在要关闭了', '然后输入框的值是' + this.returnValue);
-                    },
-                    afterClose:function(){
-                        console.log('已经关闭,你保存的值是' + this.returnValue);
+                        cancel:function(){
+                            console.log('你点了cancel按钮');
+                        },
+                        onShow:function(){
+                            var self = this, input = this.node.querySelector('input');
+                            input.addEventListener('input',function(){
+                                self.returnValue = this.value.trim();
+                            },false);
+                            console.log('就要显示了');
+                        },
+                        afterShow:function(){
+                            console.log('显示完成');
+                        },
+                        onClose:function(){
+                            console.log('现在要关闭了', '然后输入框的值是' + this.returnValue);
+                        },
+                        afterClose:function(){
+                            console.log('已经关闭,你保存的值是' + this.returnValue);
+                        }
                     }
                 },
-                d = tan(config),
+                d = tan(config()),
                 e = (function(){
-                    config['in'] = {
+                    var opts = config();
+                    opts['in'] = {
                         name:'bounceInLeft'
                     };
-                    config['out'] = {
+                    opts['out'] = {
                         name:'bounceOutRight'
                     };
-                    return tan(config);
+                    return tan(opts);
                 })(),
                 f = (function(){
-                    config['in'] = {
+                    var opts = config();
+                    opts['in'] = {
                         name:'flipInX'
                     };
-                    config['out'] = {
+                    opts['out'] = {
                         name:'flipOutX'
                     };
-                    return tan(config);
+                    return tan(opts);
                 })();
 
             //第一个弹窗增加自定义ok事件
