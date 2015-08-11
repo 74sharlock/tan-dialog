@@ -332,12 +332,14 @@
 
   window.tanTips = function(msg, time, fn, skin, top) {
     return new tan({
-      skin: 'tanTips ' + skin,
+      skin: 'tanTips ' + (skin || ''),
       title: false,
       top: top || '50px',
       width: 300,
       height: 'auto',
       content: '<div class="text-center">' + msg + '</div>',
+      ok: false,
+      cancel: false,
       onShow: function() {
         var self;
         self = this;
