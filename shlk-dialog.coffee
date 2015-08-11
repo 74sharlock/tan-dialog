@@ -307,12 +307,14 @@ window.tanConfirm = (msg, ok, cancel)->
 #短暂提示
 window.tanTips = (msg, time, fn, skin, top) ->
 	new tan(
-		skin:'tanTips ' + skin
+		skin:'tanTips ' + (skin || '')
 		title : no
 		top: top || '50px'
 		width : 300
 		height : 'auto'
 		content : '<div class="text-center">' + msg + '</div>'
+		ok:false
+		cancel:false
 		onShow : ()->
 			self = @
 			setTimeout(()->
