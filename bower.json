@@ -1,0 +1,16 @@
+{
+  "name": "tan-dialog",
+  "version": "0.0.2",
+  "main": "./shlk-dialog.js",
+  "author": {
+    "name": "74sharlock",
+    "email": "905711341@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/74sharlock/tan-dialog.git"
+  },
+  "ignore": [],
+  "dependencies": {
+  }
+}
