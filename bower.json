@@ -1,7 +1,7 @@
 {
   "name": "tan-dialog",
   "version": "0.0.2",
-  "main": "./shlk-dialog.js",
+  "main": ["./shlk-dialog.js","./tan.css"],
   "author": {
     "name": "74sharlock",
     "email": "905711341@qq.com"
