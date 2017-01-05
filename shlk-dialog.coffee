@@ -28,12 +28,14 @@
 		@listeners = @listeners or {}
 		@listeners[event] = @listeners[event] or []
 		@listeners[event].push(fn);
+		@
 
 		# @node.addEventListener(event, fn , no)
 
 	_fireEvent = (event) ->
 
-		return fn.call(@) for fn in @listeners[event] when @listeners[event] and isFunction(fn) if @listeners
+		fn.call(@) for fn in @listeners[event] when @listeners[event] and isFunction(fn) if @listeners
+		@
 
 	# 创建弹框节点
 	createNode = ()->

@@ -1,7 +1,7 @@
 {
   "name": "tan-dialog",
   "filename": "shlk-dialog.min.js",
-  "version": "0.0.3-beta",
+  "version": "0.0.4-beta",
   "description": "a javascript dialog",
   "main": "./shlk-dialog.js",
   "keywords": [
