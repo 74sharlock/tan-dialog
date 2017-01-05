@@ -30,7 +30,8 @@
     _bindEvent = function(event, fn) {
       this.listeners = this.listeners || {};
       this.listeners[event] = this.listeners[event] || [];
-      return this.listeners[event].push(fn);
+      this.listeners[event].push(fn);
+      return this;
     };
     _fireEvent = function(event) {
       var fn, i, len, ref;
@@ -39,10 +40,11 @@
         for (i = 0, len = ref.length; i < len; i++) {
           fn = ref[i];
           if (this.listeners[event] && isFunction(fn)) {
-            return fn.call(this);
+            fn.call(this);
           }
         }
       }
+      return this;
     };
     createNode = function() {
       var b, btn, c, cancelVal, className, content, div, height, okVal, otherHeight, t, title, width;
