@@ -1,7 +1,7 @@
 {
   "name": "tan-dialog",
   "filename": "shlk-dialog.min.js",
-  "version": "0.0.2",
+  "version": "0.0.3-beta",
   "description": "a javascript dialog",
   "main": "./shlk-dialog.js",
   "keywords": [
@@ -17,6 +17,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/74sharlock/tan-dialog.git"
+  },
+  "devDependencies": {
+    "animate.css": "^3.5.2",
+    "coffee-script": "^1.12.2"
   }
-
 }
