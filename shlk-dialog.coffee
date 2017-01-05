@@ -47,7 +47,7 @@
 		div.id = @id
 
 		# 配置内容
-		title = (if @config['title'] isnt false then '<div class="tan-title"><span>' + @config['title'] + '</span><i class="close-this fa fa-close">X</i></div>' else '')
+		title = (if @config['title'] isnt false then '<div class="tan-title"><span>' + @config['title'] + '</span><i class="close-this">X</i></div>' else '')
 		content = @config['content'] or ''
 		okVal = @config['okVal'] or '确定'
 		cancelVal = @config['cancelVal'] or '取消'
