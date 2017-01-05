@@ -4,7 +4,7 @@
 	else if typeof(module) isnt 'undefined'
 		module.exports = factory()
 	else
-		root.lb = factory()
+		root.tan = factory()
 )(@, ()->
 	#工具区
 	doc = document

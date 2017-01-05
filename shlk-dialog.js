@@ -8,7 +8,7 @@
     } else if (typeof module !== 'undefined') {
       return module.exports = factory();
     } else {
-      return root.lb = factory();
+      return root.tan = factory();
     }
   })(this, function() {
     var CE, D, Q, QA, Tan, _bindEvent, _fireEvent, animate, createMask, createNode, doc, errorTips, getType, infoTips, isFunction, now, primaryTips, sucTips, tan, tanAlert, tanConfirm, tanTips, toString, warnTips;
