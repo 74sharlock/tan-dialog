@@ -258,7 +258,8 @@
       };
 
       Tan.prototype.on = function(event, fn) {
-        return _bindEvent.call(this, event, fn);
+        _bindEvent.call(this, event, fn);
+        return this;
       };
 
       return Tan;

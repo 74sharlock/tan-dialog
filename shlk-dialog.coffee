@@ -271,6 +271,7 @@
 
 		on:(event,fn)->
 			_bindEvent.call(@, event, fn)
+			@
 
 	tan = (config)->
 		config = {} if getType(config) isnt 'object'
